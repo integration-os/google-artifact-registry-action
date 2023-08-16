@@ -32,8 +32,9 @@ runs:
     - name: Get Docker registry from image
       id: get_docker_registry
       run: |
-        registry=$(echo ${{ input.image }} | cut -d / -f 1)
+        registry=$(echo ${{ inputs.image }} | cut -d / -f 1)
         echo "registry=$registry >> $GITHUB_OUTPUT"
+      shell: bash
 
     - name: Log into Google Artifact Registry
       uses: docker/login-action@v2
@@ -47,4 +48,4 @@ runs:
       with:
         file: ${{ inputs.file }}
         push: true
-        tags: ${{ image }}
+        tags: ${{ inputs.image }}
