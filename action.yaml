@@ -1,5 +1,5 @@
 name: google-artifact-registry-action
-description: An action for Github Actions that authenticates to Google Artifact Registry, builds a Docker image and pushes it to an Artifact Registry repository.
+description: A GitHub action that authenticates to Google Artifact Registry, builds a Docker image and pushes it to an Artifact Registry repository.
 
 inputs:
   image:

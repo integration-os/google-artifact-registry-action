@@ -1,6 +1,6 @@
 # google-artifact-registry-action
 
-An action for GitHub Actions that authenticates to [Google Artifact Registry](https://cloud.google.com/artifact-registry), builds a Docker image and pushes it to an Artifact Registry repository.
+A GitHub action that authenticates to [Google Artifact Registry](https://cloud.google.com/artifact-registry), builds a Docker image and pushes it to an Artifact Registry repository.
 
 
 ## Usage
@@ -8,7 +8,6 @@ An action for GitHub Actions that authenticates to [Google Artifact Registry](ht
 ```yaml
 jobs:
   build:
-    name: Build and push Docker image to Google Artifact Registry
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
