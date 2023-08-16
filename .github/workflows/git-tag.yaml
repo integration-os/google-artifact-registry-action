@@ -1,0 +1,16 @@
+on:
+  push:
+    branches:
+      - main
+
+env:
+  tag_name: 1
+
+jobs:
+  tag:
+    runs-on: ubuntu-latst
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          git -c user.name="$(git log -n 1 --pretty=format:%an)" -c user.email="$(git log -n 1 --pretty=format:%ae)" tag ${{ env.tag_name }}
+          git push origin ${{ env.tag_name }}

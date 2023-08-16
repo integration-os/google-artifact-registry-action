@@ -1,0 +1,50 @@
+name: google-artifact-registry-action
+description: An action for Github Actions that authenticates to Google Artifact Registry, builds a Docker image and pushes it to an Artifact Registry repository.
+
+inputs:
+  image:
+    required: true
+    description: Full Docker image name to build and push, including the registry, repository and tag
+  file:
+    required: false
+    default: Dockerfile
+    description: Path to the `Dockerfile` to build
+  service_account:
+    required: false
+    default: github-actions@buildable-production.iam.gserviceaccount.com
+    description: GCP service account used to authenticate to Google Cloud
+  workload_identity_provider:
+    required: false
+    default: projects/157041665647/locations/global/workloadIdentityPools/github-actions/providers/github-actions
+    description: GCP workload identity provider used to authenticate to Google Cloud
+
+runs:
+  using: composite
+  steps:
+    - name: Authenticate to Google Cloud
+      id: auth
+      uses: google-github-actions/auth@v1
+      with:
+        token_format: access_token
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
+        service_account: ${{ inputs.service_account }}
+
+    - name: Get Docker registry from image
+      id: get_docker_registry
+      run: |
+        registry=$(echo ${{ input.image }} | cut -d / -f 1)
+        echo "registry=$registry >> $GITHUB_OUTPUT"
+
+    - name: Log into Google Artifact Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ steps.get_docker_registry.outputs.registry }}
+        username: oauth2accesstoken
+        password: ${{ steps.auth.outputs.access_token }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        file: ${{ inputs.file }}
+        push: true
+        tags: ${{ image }}
