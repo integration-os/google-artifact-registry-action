@@ -12,5 +12,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          git -c user.name="$(git log -n 1 --pretty=format:%an)" -c user.email="$(git log -n 1 --pretty=format:%ae)" tag ${{ env.tag_name }}
-          git push origin ${{ env.tag_name }}
+          git -c user.name="$(git log -n 1 --pretty=format:%an)" -c user.email="$(git log -n 1 --pretty=format:%ae)" tag --force ${{ env.tag_name }}
+          git push --force origin ${{ env.tag_name }}
