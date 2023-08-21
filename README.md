@@ -9,6 +9,12 @@ A GitHub action that authenticates to [Google Artifact Registry](https://cloud.g
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # permissions required by google-github-actions/auth@v1, a dependency of event-cloud/google-artifact-registry-action@v1
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - uses: actions/checkout@v3
       - uses: event-cloud/google-artifact-registry-action@v1
