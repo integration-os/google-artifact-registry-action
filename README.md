@@ -28,6 +28,6 @@ jobs:
 | ------ | --------- | ------- |------------ |
 | `image`  | yes | | Full Docker image name to build and push, including the registry, repository and tag |
 | `file` | no | `Dockerfile` | Path to the `Dockerfile` to build |
-| `build-args` | no | `[]` | `build-args` to pass to `docker/build-push-action` |
+| `build-args` | no | `[]` | The `build-args` to pass to `docker/build-push-action` |
 | `service_account` | no | `github-actions@buildable-production.iam.gserviceaccount.com` | GCP service account used to authenticate to Google Cloud |
 | `workload_identity_provider` | no | `projects/157041665647/locations/global/workloadIdentityPools/github-actions/providers/github-actions` | GCP workload identity provider used to authenticate to Google Cloud |
