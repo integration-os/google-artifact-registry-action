@@ -9,6 +9,10 @@ inputs:
     required: false
     default: Dockerfile
     description: Path to the `Dockerfile` to build
+  build-args:
+    required: false
+    default: []
+    desription: `build-args` to pass to `docker/build-push-action`
   service_account:
     required: false
     default: github-actions@buildable-production.iam.gserviceaccount.com
@@ -47,5 +51,6 @@ runs:
       uses: docker/build-push-action@v4
       with:
         file: ${{ inputs.file }}
+        build-args: ${{ inputs.build-args }}
         push: true
         tags: ${{ inputs.image }}
