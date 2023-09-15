@@ -54,5 +54,5 @@ runs:
         build-args: ${{ inputs.build-args }}
         push: true
         tags: ${{ inputs.image }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=registry,ref=${{ steps.get_docker_registry.outputs.registry }}/${{ inputs.image }}
+        cache-to: type=inline
