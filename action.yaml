@@ -54,3 +54,5 @@ runs:
         build-args: ${{ inputs.build-args }}
         push: true
         tags: ${{ inputs.image }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
