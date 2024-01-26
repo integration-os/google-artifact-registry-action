@@ -13,6 +13,10 @@ inputs:
     required: false
     default: ""
     description: The `build-args` to pass to `docker/build-push-action`
+  secrets:
+    required: false
+    default: ""
+    description: The `secrets` to pass to `docker/build-push-action`
   service_account:
     required: false
     default: github-actions@buildable-production.iam.gserviceaccount.com
@@ -52,6 +56,7 @@ runs:
       with:
         file: ${{ inputs.file }}
         build-args: ${{ inputs.build-args }}
+        secrets: ${{ inputs.secrets }}
         push: true
         tags: ${{ inputs.image }}
         cache-from: type=registry,ref=${{ steps.get_docker_registry.outputs.registry }}/${{ inputs.image }}
