@@ -10,25 +10,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # permissions required by google-github-actions/auth@v1, a dependency of integration-os/google-artifact-registry-action@v1
+    # permissions required by google-github-actions/auth@v1, a dependency of integration-os/google-artifact-registry-action@v2
     permissions:
       contents: read
       id-token: write
 
     steps:
       - uses: actions/checkout@v3
-      - uses: integration-os/google-artifact-registry-action@v1
+      - uses: integration-os/google-artifact-registry-action@v2
         with:
-          image: us-east4-docker.pkg.dev/buildable-production/event-docker/my-service:v1
+          image: us-docker.pkg.dev/integrationos/docker-oss/my-service:v1
+          service_account: github-actions@integrationos.iam.gserviceaccount.com
+          workload_identity_provider: projects/356173785332/locations/global/workloadIdentityPools/github-actions/providers/github-actions
 ```
+
 
 ### Inputs
 
 | Input  | Required? | Default | Description |
 | ------ | --------- | ------- |------------ |
 | `image`  | yes | | Full Docker image name to build and push, including the registry, repository and tag |
+| `service_account` | yes | | GCP service account used to authenticate to Google Cloud |
+| `workload_identity_provider` | yes | | GCP workload identity provider used to authenticate to Google Cloud |
 | `file` | no | `Dockerfile` | Path to the `Dockerfile` to build |
 | `build-args` | no | `""` | The `build-args` to pass to `docker/build-push-action` |
 | `secrets` | no | `""` | The `secrets` to pass to `docker/build-push-action` |
-| `service_account` | no | `github-actions@buildable-production.iam.gserviceaccount.com` | GCP service account used to authenticate to Google Cloud |
-| `workload_identity_provider` | no | `projects/157041665647/locations/global/workloadIdentityPools/github-actions/providers/github-actions` | GCP workload identity provider used to authenticate to Google Cloud |

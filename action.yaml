@@ -5,6 +5,12 @@ inputs:
   image:
     required: true
     description: Full Docker image name to build and push, including the registry, repository and tag
+  service_account:
+    required: true
+    description: GCP service account used to authenticate to Google Cloud
+  workload_identity_provider:
+    required: true
+    description: GCP workload identity provider used to authenticate to Google Cloud
   file:
     required: false
     default: Dockerfile
@@ -17,14 +23,6 @@ inputs:
     required: false
     default: ""
     description: The `secrets` to pass to `docker/build-push-action`
-  service_account:
-    required: false
-    default: github-actions@buildable-production.iam.gserviceaccount.com
-    description: GCP service account used to authenticate to Google Cloud
-  workload_identity_provider:
-    required: false
-    default: projects/157041665647/locations/global/workloadIdentityPools/github-actions/providers/github-actions
-    description: GCP workload identity provider used to authenticate to Google Cloud
 
 runs:
   using: composite
