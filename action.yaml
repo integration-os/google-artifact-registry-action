@@ -13,7 +13,6 @@ inputs:
     description: GCP workload identity provider used to authenticate to Google Cloud
   context:
     required: false
-    default: Dockerfile
     description: Build's context is the set of files located in the specified PATH or URL
   file:
     required: false
