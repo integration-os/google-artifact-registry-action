@@ -32,6 +32,7 @@ jobs:
 | `image`  | yes | | Full Docker image name to build and push, including the registry, repository and tag |
 | `service_account` | yes | | GCP service account used to authenticate to Google Cloud |
 | `workload_identity_provider` | yes | | GCP workload identity provider used to authenticate to Google Cloud |
+| `context` | no | [Git context](https://github.com/docker/build-push-action/tree/master#git-context)| Build's context is the set of files located in the specified PATH or URL |
 | `file` | no | `Dockerfile` | Path to the `Dockerfile` to build |
 | `build-args` | no | `""` | The `build-args` to pass to `docker/build-push-action` |
 | `secrets` | no | `""` | The `secrets` to pass to `docker/build-push-action` |
